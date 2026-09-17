@@ -49,8 +49,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     containerColor = Color.Black
                 ) { innerPadding ->
-                    BasicComponentScreen(
-                        modifier = Modifier.padding(innerPadding)
+                    //  BasicComponentScreen(
+                    //          modifier = Modifier.padding(innerPadding)
+                    GameOver(modifier = Modifier.padding(innerPadding)
                     )
                 }
             }
@@ -126,7 +127,7 @@ fun BasicComponentScreen(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            jatpackCompose(modifier = Modifier.size(80.dp))
+            JatpackCompose(modifier = Modifier.size(80.dp))
 
             Text(
                 modifier = Modifier
@@ -141,11 +142,53 @@ fun BasicComponentScreen(modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+fun GameOver(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color.Black),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(24.dp)
+        ) {
+            Text(
+                text = "GAME 0VER",
+                color = Color.White,
+                fontSize = 60.sp,
+                fontWeight = FontWeight.W700
+            )
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                cores.forEach { cor ->
+                    AndroidEnemy(
+                        modifier = Modifier.size(75.dp),
+                        color = cor
+                    )
+                }
+            }
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun BasicComponentScreenPreview() {
     Exercicio1Theme {
         BasicComponentScreen()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GameOverPreview() {
+    Exercicio1Theme {
+        GameOver()
     }
 }
 
@@ -163,7 +206,7 @@ fun AndroidEnemy(
 }
 
 @Composable
-fun jatpackCompose(
+fun JatpackCompose(
     modifier: Modifier = Modifier
 ){
     Image(
